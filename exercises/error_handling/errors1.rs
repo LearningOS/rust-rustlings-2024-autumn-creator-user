@@ -12,10 +12,11 @@
 
 pub fn generate_nametag_text(name: String) -> Result<String, String> {
     if name.is_empty() {
-        // Empty names aren't allowed.
-        None
+        // Return an error explaining the issue
+        Err("`name` was empty; it must be nonempty.".to_string())
     } else {
-        Some(format!("Hi! My name is {}", name))
+        // Return the formatted string in the Ok variant
+        Ok(format!("Hi! My name is {}", name))
     }
 }
 
@@ -40,3 +41,4 @@ mod tests {
         );
     }
 }
+
