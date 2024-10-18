@@ -37,11 +37,17 @@ where
     }
 
     fn heapify_up(&mut self, mut idx: usize) {
-        while idx > 1 && (self.comparator)(&self.items[idx], &self.items[self.parent_idx(idx)]) {
-            self.items.swap(idx, self.parent_idx(idx));
-            idx = self.parent_idx(idx);
+        while idx > 1 {
+            let parent_idx = self.parent_idx(idx);
+            if (self.comparator)(&self.items[idx], &self.items[parent_idx]) {
+                self.items.swap(idx, parent_idx);
+                idx = parent_idx;
+            } else {
+                break;
+            }
         }
     }
+    
 
     fn heapify_down(&mut self, mut idx: usize) {
         while self.children_present(idx) {

@@ -1,4 +1,25 @@
+#[derive(Debug)]
+struct Stack<T> {
+    data: Vec<T>,
+    size: usize,
+}
+
 impl<T> Stack<T> {
+    // Create a new stack
+    fn new() -> Self {
+        Stack {
+            data: Vec::new(),
+            size: 0,
+        }
+    }
+
+    // Push an element onto the stack
+    fn push(&mut self, item: T) {
+        self.data.push(item);
+        self.size += 1;
+    }
+
+    // Pop an element from the stack
     fn pop(&mut self) -> Option<T> {
         if self.size == 0 {
             return None;
@@ -6,8 +27,14 @@ impl<T> Stack<T> {
         self.size -= 1;
         self.data.pop()
     }
+
+    // Check if the stack is empty
+    fn is_empty(&self) -> bool {
+        self.size == 0
+    }
 }
 
+// Function to check if brackets are balanced
 fn bracket_match(bracket: &str) -> bool {
     let mut stack = Stack::new();
     
